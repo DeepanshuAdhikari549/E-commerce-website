@@ -78,7 +78,7 @@ Follow these steps to set up the Admin Panel, Backend, and Frontend for FitBae o
 
 ### **1. Clone the Repository**
 
-- git clone https://github.com/SagarNegi10/Ecommerce-App.git
+- git clone https://github.com/DeepanshuAdhikari549/E-commerce-website.git
 
 - cd Ecommerce-App
 
