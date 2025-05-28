@@ -11,7 +11,7 @@
 A full-featured Ecommerce Web Application built using the MERN stack (MongoDB, Express.js, React.js, Node.js), with secure Stripe payment integration. This project demonstrates a production-ready shopping platform featuring product browsing, user authentication, shopping cart functionality, admin controls, and secure checkout.
 ---
 ## 🌐 Live Demo
-Live - https://fitbae-frontend.vercel.app
+Live - https://fitbae-frontend-five.vercel.app
 
 ---
 
