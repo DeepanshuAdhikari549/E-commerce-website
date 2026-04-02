@@ -176,7 +176,6 @@ Follow these steps to set up the Admin Panel, Backend, and Frontend for FitBae o
 ---
 ## 🤝 Contributing
 Contributions are welcome! Please open issues or submit pull requests for any improvements or bug fixes.
-
 --- 
 ## 🙋‍♂️ Author
 Deepanshu Adhikari
