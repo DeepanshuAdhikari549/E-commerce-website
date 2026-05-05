@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Orders = () => {
 
   const {backendUrl, token, currency} = useContext(ShopContext);
 
   const [orderData, setOrderData] = useState([])
+  const [tracking, setTracking] = useState(false)
 
   const loadOrderData = async () => {
     try {
@@ -40,6 +42,23 @@ const Orders = () => {
     loadOrderData()
   },[token])
 
+  const getStatusColor = (status) => {
+    switch(status) {
+      case 'Delivered': return 'bg-green-500';
+      case 'Shipped':
+      case 'Out for delivery': return 'bg-blue-500';
+      case 'Packing': return 'bg-yellow-400';
+      default: return 'bg-orange-400';
+    }
+  }
+
+  const handleTrackOrder = async () => {
+    setTracking(true)
+    await loadOrderData()
+    setTracking(false)
+    toast.success('Order status refreshed!')
+  }
+
   return (
     <div className='border-t pt-16'>
       <div className='text-2xl'>
@@ -48,7 +67,9 @@ const Orders = () => {
 
       <div>
         {
-          orderData.map((item, index)=>(
+          orderData.length === 0
+            ? <p className='text-center text-gray-400 py-16'>No orders found.</p>
+            : orderData.map((item, index)=>(
             <div key={index} className={`py-4 border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${index === 0 ? 'border-t' : ''}`}>
               <div className='flex items-start gap-6 text-sm'>
                 <img className='w-16 sm:w-20' src={item.image[0]} alt="" />
@@ -65,10 +86,16 @@ const Orders = () => {
               </div>
               <div className='md:w-1/2 flex justify-between'>
                 <div className='flex items-center gap-2'>
-                  <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                  <p className='text-sm md:text-base'>{item.status}</p>
+                  <p className={`min-w-2 h-2 rounded-full ${getStatusColor(item.status)}`}></p>
+                  <p className='text-sm md:text-base font-medium'>{item.status}</p>
                 </div>
-                <button onClick={loadOrderData} className='border px-4 py-2 text-sm font-medium rounded-sm'>Track Order</button>
+                <button 
+                  onClick={handleTrackOrder} 
+                  disabled={tracking}
+                  className='border px-4 py-2 text-sm font-medium rounded-sm hover:bg-gray-50 transition-colors disabled:opacity-60'
+                >
+                  {tracking ? 'Refreshing...' : 'Track Order'}
+                </button>
               </div>
             </div>
           ))

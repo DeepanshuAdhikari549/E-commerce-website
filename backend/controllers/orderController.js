@@ -4,7 +4,7 @@ import Stripe from 'stripe'
 
 
 // global variables
-const currency = 'USD'
+const currency = 'inr'
 const deliveryCharges = 10
 
 
